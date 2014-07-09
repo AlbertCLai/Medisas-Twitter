@@ -35,16 +35,11 @@ if (!empty($argv)) {
   }
 }
 
-// State rolling window size to be used
-echo "\n------------------------------------------------\n";
-echo "\nAlbert: Minutes of Rolling Window: " . $rollingWindow . ($defaultWindow ? " (Time not stated. Default of 1 minute used.)\n" : "\n");
-echo "\n------------------------------------------------\n";
-
 // Start streaming, consume, & sort
 $mc = new MedisasConsumer(OAUTH_TOKEN, OAUTH_SECRET, Phirehose::METHOD_SAMPLE);
 $mc->setTimeWindow($rollingWindow);
 $mc->consume();
-$mc->sortTweets();
 
+// Technically will never get called... Unless Twitter Died... X_x
 echo "\n------------------------------------------------";
 echo "\nAlbert: Task completed.\n";
